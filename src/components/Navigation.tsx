@@ -6,7 +6,8 @@ import {
   PieChart, 
   TrendingUp, 
   FileText,
-  Home
+  Home,
+  Receipt
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -19,6 +20,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'salary', label: 'Salary Tracker', icon: BarChart3 },
     { id: 'calculator', label: 'Tax Calculator', icon: Calculator },
+    { id: 'payslip', label: 'Payslip', icon: Receipt },
     { id: 'benefits', label: 'Benefits', icon: PieChart },
     { id: 'goals', label: 'Goals', icon: Target },
     { id: 'budget', label: 'Budget', icon: TrendingUp },

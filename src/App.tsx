@@ -5,6 +5,7 @@ import { Dashboard } from './components/Dashboard';
 import { SalaryTracker } from './components/SalaryTracker';
 import { TaxCalculator } from './components/TaxCalculator';
 import { Goals } from './components/Goals';
+import { PayslipGenerator } from './components/PayslipGenerator';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -26,18 +27,20 @@ function App() {
         );
       case 'goals':
         return <Goals />;
+      case 'payslip':
+        return <PayslipGenerator />;
       case 'budget':
         return (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Budget Planner</h2>
-            <p className="text-gray-600">Plan and track your budget based on your salary data.</p>
+            <p className="text-gray-600">Plan and track your budget based on your Indian salary data with expense categories.</p>
           </div>
         );
       case 'reports':
         return (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Reports & Analytics</h2>
-            <p className="text-gray-600">Generate comprehensive reports on your salary and career progress.</p>
+            <p className="text-gray-600">Generate comprehensive reports on your salary trends, tax savings, and career progress in Indian context.</p>
           </div>
         );
       default:
