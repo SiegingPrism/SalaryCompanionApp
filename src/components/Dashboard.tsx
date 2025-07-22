@@ -36,7 +36,7 @@ export const Dashboard: React.FC = () => {
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-white p-8">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-3xl font-bold mb-2">Welcome back, Rahul!</h2>
+            <h2 className="text-3xl font-bold mb-2">Welcome back, Ishan!</h2>
             <p className="text-blue-100 text-lg">Here's your salary overview for December 2024</p>
           </div>
           <div className="text-right">

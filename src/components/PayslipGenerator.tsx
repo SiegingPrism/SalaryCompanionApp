@@ -7,7 +7,7 @@ export const PayslipGenerator: React.FC = () => {
   
   const payslipData = {
     employee: {
-      name: 'Rahul Sharma',
+      name: 'Ishan',
       id: 'EMP001',
       designation: 'Senior Software Engineer',
       department: 'Technology',
