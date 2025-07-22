@@ -1,5 +1,6 @@
 import React from 'react';
-import { DollarSign, TrendingUp, Calendar, Target } from 'lucide-react';
+import { DollarSign, TrendingUp, Calendar, Target, IndianRupee, PiggyBank, Award } from 'lucide-react';
+import { formatCurrency } from '../utils/currency';
 
 interface MetricCardProps {
   title: string;
@@ -10,7 +11,7 @@ interface MetricCardProps {
 }
 
 const MetricCard: React.FC<MetricCardProps> = ({ title, value, change, icon, color }) => (
-  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 hover:scale-105">
     <div className="flex items-center justify-between">
       <div>
         <p className="text-sm font-medium text-gray-600">{title}</p>
@@ -25,28 +26,110 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, change, icon, col
 );
 
 export const Dashboard: React.FC = () => {
+  const currentSalary = 1200000; // ₹12 LPA
+  const monthlyTakeHome = 85000;
+  const annualTakeHome = monthlyTakeHome * 12;
+  
   return (
     <div className="space-y-8">
+      {/* Welcome Section */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-white p-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-3xl font-bold mb-2">Welcome back, Rahul!</h2>
+            <p className="text-blue-100 text-lg">Here's your salary overview for December 2024</p>
+          </div>
+          <div className="text-right">
+            <p className="text-blue-100 text-sm">Current CTC</p>
+            <p className="text-4xl font-bold">{formatCurrency(currentSalary, 'INR')}</p>
+          </div>
+        </div>
+      </div>
+
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <MetricCard
-          title="Annual Salary"
-          value="$85,000"
-          change="+5% from last year"
-          icon={<DollarSign className="h-6 w-6 text-green-600" />}
+          title="Annual CTC"
+          value={formatCurrency(currentSalary, 'INR')}
+          change="+8% from last year"
+          icon={<IndianRupee className="h-6 w-6 text-green-600" />}
           color="text-green-600"
         />
         <MetricCard
           title="Monthly Take-Home"
-          value="$5,240"
-          change="After taxes & benefits"
+          value={formatCurrency(monthlyTakeHome, 'INR')}
+          change="After tax & deductions"
           icon={<TrendingUp className="h-6 w-6 text-blue-600" />}
           color="text-blue-600"
         />
         <MetricCard
-          title="Next Review"
-          value="3 months"
-          change="Performance review due"
+          title="Tax Saved"
+          value={formatCurrency(150000, 'INR')}
+          change="Under 80C & other sections"
+          icon={<PiggyBank className="h-6 w-6 text-purple-600" />}
+          color="text-purple-600"
+        />
+        <MetricCard
+          title="Performance Bonus"
+          value={formatCurrency(50000, 'INR')}
+          change="Q4 2024 achievement"
+          icon={<Award className="h-6 w-6 text-orange-600" />}
+          color="text-orange-600"
+        />
+      </div>
+
+      {/* Additional Metrics */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">EPF Balance</h3>
+            <PiggyBank className="h-6 w-6 text-green-600" />
+          </div>
+          <p className="text-2xl font-bold text-green-600">{formatCurrency(450000, 'INR')}</p>
+          <p className="text-sm text-gray-600 mt-1">+{formatCurrency(18000, 'INR')} this month</p>
+        </div>
+        
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">Next Appraisal</h3>
+            <Calendar className="h-6 w-6 text-blue-600" />
+          </div>
+          <p className="text-2xl font-bold text-blue-600">3 months</p>
+          <p className="text-sm text-gray-600 mt-1">Expected hike: 12-15%</p>
+        </div>
+        
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">Salary Goal</h3>
+            <Target className="h-6 w-6 text-purple-600" />
+          </div>
+          <p className="text-2xl font-bold text-purple-600">{formatCurrency(1500000, 'INR')}</p>
+          <p className="text-sm text-gray-600 mt-1">80% achieved</p>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <button className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors text-center">
+            <Calendar className="h-6 w-6 text-blue-600 mx-auto mb-2" />
+            <span className="text-sm font-medium text-blue-900">View Payslip</span>
+          </button>
+          <button className="p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors text-center">
+            <PiggyBank className="h-6 w-6 text-green-600 mx-auto mb-2" />
+            <span className="text-sm font-medium text-green-900">Tax Planning</span>
+          </button>
+          <button className="p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors text-center">
+            <Target className="h-6 w-6 text-purple-600 mx-auto mb-2" />
+            <span className="text-sm font-medium text-purple-900">Set Goals</span>
+          </button>
+          <button className="p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors text-center">
+            <TrendingUp className="h-6 w-6 text-orange-600 mx-auto mb-2" />
+            <span className="text-sm font-medium text-orange-900">Salary Report</span>
+          </button>
+        </div>
+      </div>
           icon={<Calendar className="h-6 w-6 text-purple-600" />}
           color="text-purple-600"
         />
@@ -62,17 +145,20 @@ export const Dashboard: React.FC = () => {
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Pay Periods</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Payslips</h3>
           <div className="space-y-4">
             {[
-              { period: 'December 2024', gross: '$7,083', net: '$5,240' },
-              { period: 'November 2024', gross: '$7,083', net: '$5,240' },
-              { period: 'October 2024', gross: '$7,083', net: '$5,240' },
+              { period: 'December 2024', gross: formatCurrency(100000, 'INR'), net: formatCurrency(85000, 'INR'), bonus: formatCurrency(10000, 'INR') },
+              { period: 'November 2024', gross: formatCurrency(100000, 'INR'), net: formatCurrency(85000, 'INR'), bonus: formatCurrency(0, 'INR') },
+              { period: 'October 2024', gross: formatCurrency(100000, 'INR'), net: formatCurrency(85000, 'INR'), bonus: formatCurrency(5000, 'INR') },
             ].map((pay, index) => (
-              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                 <div>
                   <p className="font-medium text-gray-900">{pay.period}</p>
                   <p className="text-sm text-gray-600">Gross: {pay.gross}</p>
+                  {pay.bonus !== formatCurrency(0, 'INR') && (
+                    <p className="text-sm text-green-600">Bonus: {pay.bonus}</p>
+                  )}
                 </div>
                 <div className="text-right">
                   <p className="font-semibold text-green-600">{pay.net}</p>
@@ -84,21 +170,28 @@ export const Dashboard: React.FC = () => {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Benefits Overview</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Benefits & Deductions</h3>
           <div className="space-y-4">
             {[
-              { name: '401(k) Match', value: '$212/month', status: 'Active' },
-              { name: 'Health Insurance', value: '$340/month', status: 'Active' },
-              { name: 'Life Insurance', value: '$25/month', status: 'Active' },
+              { name: 'EPF Contribution', value: formatCurrency(1800, 'INR') + '/month', status: 'Active', type: 'deduction' },
+              { name: 'Health Insurance', value: formatCurrency(5000, 'INR') + '/month', status: 'Active', type: 'benefit' },
+              { name: 'Meal Allowance', value: formatCurrency(2000, 'INR') + '/month', status: 'Active', type: 'benefit' },
+              { name: 'Professional Tax', value: formatCurrency(200, 'INR') + '/month', status: 'Active', type: 'deduction' },
             ].map((benefit, index) => (
-              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                 <div>
                   <p className="font-medium text-gray-900">{benefit.name}</p>
                   <p className="text-sm text-gray-600">{benefit.value}</p>
                 </div>
-                <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
-                  {benefit.status}
-                </span>
+                <div className="text-right">
+                  <span className={`px-3 py-1 text-xs font-medium rounded-full ${
+                    benefit.type === 'benefit' 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {benefit.status}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
